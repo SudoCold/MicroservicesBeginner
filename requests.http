@@ -1,0 +1,32 @@
+### List products
+GET http://localhost:5001/products
+
+### Get one product
+GET http://localhost:5001/products/1
+
+### Create an order (expected: 201, total 3000)
+POST http://localhost:5002/orders
+Content-Type: application/json
+
+{"productId": 1, "quantity": 2}
+
+### List orders
+GET http://localhost:5002/orders
+
+### Invalid quantity (expected: 400)
+POST http://localhost:5002/orders
+Content-Type: application/json
+
+{"productId": 1, "quantity": 0}
+
+### Missing product (expected: 404)
+POST http://localhost:5002/orders
+Content-Type: application/json
+
+{"productId": 999, "quantity": 1}
+
+### Stop Products API, then send this (expected: 503)
+POST http://localhost:5002/orders
+Content-Type: application/json
+
+{"productId": 1, "quantity": 1}
